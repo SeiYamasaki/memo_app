@@ -63,4 +63,11 @@ class MemoController extends Controller
         //データを保存した後、memos.index（メモ一覧表示）のルートにリダイレクト
         return redirect(route("memos.index"));
     }
+        public function destroy($id)
+    {
+        $memo = Memo::find($id);
+        $memo->delete();
+
+        return redirect(route('memos.index'));
+    }
 }

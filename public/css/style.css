@@ -4,3 +4,12 @@
     width: 300px;
     height: 100px;
 }
+
+.button-group {
+    display: flex;
+}
+
+.button-group>*:not(:last-child) {
+    /* buttonグループ直下(>)のボタンやフォームの*全てに適用するが､最後の子要素だけは適用しない */
+    margin-right: 10px;
+}
