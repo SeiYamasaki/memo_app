@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Memo;
 use Illuminate\Database\Query\IndexHint;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request; これが通常
+use App\Http\Requests\MemoRequest;//バリデを適用はこっち！大文字注意 storeとupdateをバリデ仕様に
 
 class MemoController extends Controller
 {
@@ -22,7 +23,8 @@ class MemoController extends Controller
         return view('memos.create');
     }
 
-    public function store(Request $request) //データの登録アクション｡リクエストクラスの変数を引数で定義
+    //public function store(Request $request) //データの登録アクション｡リクエストクラスの変数を引数で定義
+    public function store(MemoRequest $request)
     {
         //インスタンス生成 新しいMemoモデルのインスタンスを生成
         $memo = new Memo();
@@ -48,8 +50,9 @@ class MemoController extends Controller
         $memo = Memo::find($id);
         return view("memos.edit", ["memo" => $memo]);
     }
-    public function update(Request $request,$id)
+    //public function update(Request $request,$id)
     // どれを更新するのかわからないから2つの引数
+    public function update(MemoRequest $request,$id)
     {
         //更新対象データの取得
         $memo = Memo::find($id);
