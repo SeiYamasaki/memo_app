@@ -43,4 +43,24 @@ class MemoController extends Controller
         return view("memos.show", ["memo" => $memo]);
         //$memoをmemoに渡して､memoをビューに渡す
     }
+    public function edit($id) //データの表示
+    {
+        $memo = Memo::find($id);
+        return view("memos.edit", ["memo" => $memo]);
+    }
+    public function update(Request $request,$id)
+    // どれを更新するのかわからないから2つの引数
+    {
+        //更新対象データの取得
+        $memo = Memo::find($id);
+
+        //ユーザーから送信されたリクエスト（フォームなど）に含まれるtitleとbodyの値を、Memoモデルのtitleおよびbodyプロパティに代入
+        $memo->title = $request->title;
+        $memo->body = $request->body;
+        //モデルインスタンスのデータをデータベースに保存
+        $memo->save();
+
+        //データを保存した後、memos.index（メモ一覧表示）のルートにリダイレクト
+        return redirect(route("memos.index"));
+    }
 }
