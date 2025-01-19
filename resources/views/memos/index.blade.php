@@ -21,6 +21,8 @@
             <li><a href="{{ route('memos.show', $memo) }}">{{ $memo->title }}</a></li>
         @endforeach
     </ul>
+    <!-- 新規登録画面へジャンプする ｡buttonはシングルクオーテ-->
+    <button onclick='location.href="{{ route('memos.create') }}"'>登録する</button>
 </body>
 
 </html>
