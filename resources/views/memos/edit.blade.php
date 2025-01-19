@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>memo create</title>
+    <title>memo edit</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body>
-    <a href="{{ route('memos.index') }}">戻る</a>
-    <h1>新規登録</h1>
-    {{-- バリデ処理 --}}
+    <a href="{{ route('memos.show', $memo) }}">戻る</a>
+    <h1>更新</h1>
+    {{-- バイデ処理 --}}
     @if ($errors->any())
         <div class="error">
             <p>
@@ -25,21 +25,21 @@
         </div>
     @endif
 
-    <form action="{{ route('memos.store') }}" method="post">
+    <!-- 更新先はmemosのidにしないと増える sail artisan rote:listで確認① -->
+    <form action="{{ route('memos.update', $memo) }}" method="post">
         @csrf
-        {{-- <input type="hidden" name="_token" value="sNbl4npxJaLS3zMRpjy2XLN4hRCc4Wv2kQrhIywD" autocomplete="off"> --}}
+        @method('PATCH')
         <p>
             <label for="title">タイトル</label><br>
-            <input type="text" name="title" id="title" value="{{ old('title') }}">
-            {{-- value="{{ old('title',$memo->title) }}"バリデ処理 --}}
+            <input type="text" name="title" id="title" value="{{ $memo->title }}">
         </p>
+        {{-- value="{{ $memo->title } でもともと入れた内容を反映させる --}}
         <p>
             <label for="body">本文</label><br>
-            <textarea name="body" class="body" id="body">{{ old('body') }}</textarea>
-            {{-- value="{{ old('body',$memo->body) }}" バリデ処理 --}}
+            <textarea name="body" class="body" id="body">{{ $memo->body }}</textarea>
         </p>
-
-        <input type="submit" value="登録">
+        {{-- value="{{ $memo->body } でもともと入れた内容を反映させる --}}
+        <input type="submit" value="更新">
     </form>
 </body>
 
