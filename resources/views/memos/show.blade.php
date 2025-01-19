@@ -7,7 +7,9 @@
     <title>memo show</title>
 </head>
 <body>
-    <h1>タイトル</h1>
+    <h1>タイトル一覧</h1>
+    {{-- <a href="/memos/">戻る</a> --}}
+    <a href="{{  route("memos.index") }}">戻る</a>
     <h1>{{ $memo->title }}</h1>
     <P>本文</P>
     <p><p>{{$memo->body}}</p></p>
